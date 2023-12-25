@@ -22,7 +22,9 @@ Route::get('/', function () {
 Route::get('/get-buah', [BuahController::class, 'getBuah'])->name('get.buah');
 Route::get('/detail-buah/{id}', [DetailBuahController::class, 'detailBuah'])->name('detail.buah');
 Route::get('/buah-pertahun', [DetailBuahController::class, 'getDrilldownByTahun'])->name('buah.pertahun');
-// Route::get('/test-insert-buah', [BuahController::class, 'testQuery'])->name('test.query');
+Route::get('/buah/luas-lahan', [DetailBuahController::class, 'getDrilldownByLuasLahan'])->name('buah.luasLahan');
+Route::get('/buah/produksi', [DetailBuahController::class, 'getDrilldownByProduksi'])->name('buah.produksi');
+Route::get('/buah/produktivitas', [DetailBuahController::class, 'getDrilldownByProduktivitas'])->name('buah.produktivitas');
 
 Route::get('/drilldown', function () {
     return view('drilldown.index');

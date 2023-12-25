@@ -26,22 +26,25 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a id="nav_all" class="nav-link pilih_category" data-category="all" aria-current="true"
+                        <a id="nav_all" class="nav-link pilih_category" data-category="all"
+                            data-link-ajax="{{ route('buah.pertahun') }}" aria-current="true"
                             href="#all_categories">Yogyakarta</a>
                     </li>
                     <li class="nav-item">
                         <a id="nav_luas_lahan" class="nav-link pilih_category" data-category="luas_lahan"
-                            aria-current="true" href="#luas_lahan">Luas Lahan</a>
+                            data-link-ajax="{{ route('buah.luasLahan') }}" aria-current="true" href="#luas_lahan">Luas
+                            Lahan</a>
                     </li>
                     <li class="nav-item">
                         <a id="nav_produksi" class="nav-link pilih_category" data-category="produksi"
-                            aria-current="true" href="#produksi">Produksi</a>
+                            data-link-ajax="{{ route('buah.produksi') }}" aria-current="true" href="#produksi">Produksi</a>
                     </li>
                     <li class="nav-item">
                         <a id="nav_produktivitas" class="nav-link pilih_category" data-category="produktivitas"
-                            aria-current="true" href="#produktivitas">Produktivitas</a>
+                            data-link-ajax="{{ route('buah.produktivitas') }}" aria-current="true"
+                            href="#produktivitas">Produktivitas</a>
                     </li>
-                    
+
                 </ul>
             </div>
             <!-- Container for the charts -->
@@ -158,7 +161,7 @@
                     Swal.close()
                     // console.log(data.results);
                     if (category == 'all') {
-                        alert(category)
+                        // alert(category)
                         $('#chart_container').html(
                             `
                         <figure class="highcharts-figure">
@@ -197,6 +200,48 @@
                             satuan: 'Kwintal/Hektar',
                         }
                         loadDrilldown(data.resultsProduktivitas, data.drilldownProduktivitas, otherParam);
+                    } else if (category == 'luas_lahan') {
+                        $('#chart_container').html(
+                            `
+                        <figure class="highcharts-figure">
+                    <div id="containerLuasLahan" class="highcharts-container"></div>
+                </figure>`);
+
+                        var otherParam = {
+                            idContainer: 'containerLuasLahan',
+                            title: 'Luas Panen',
+                            yTitle: 'Luas Panen',
+                            satuan: 'Hektar',
+                        }
+                        loadDrilldown(data.buahByLuasLahan, data.drillDownBuahByLuasLahan, otherParam);
+                    } else if (category == 'produksi') {
+                        $('#chart_container').html(
+                            `
+                        <figure class="highcharts-figure">
+                    <div id="containerProduksi" class="highcharts-container"></div>
+                </figure>`);
+
+                        var otherParam = {
+                            idContainer: 'containerProduksi',
+                            title: 'Produksi',
+                            yTitle: 'Produksi',
+                            satuan: 'Ton',
+                        }
+                        loadDrilldown(data.buahByProduksi, data.drillDownBuahByProduksi, otherParam);
+                    } else if (category == 'produktivitas') {
+                        $('#chart_container').html(
+                            `
+                            <figure class="highcharts-figure">
+                    <div id="containerProduktivitas" class="highcharts-container"></div>
+                </figure>`
+                        );
+                        var otherParam = {
+                            idContainer: 'containerProduktivitas',
+                            title: 'Produktivitas',
+                            yTitle: 'Produktivitas',
+                            satuan: 'Kwintal/Hektar',
+                        }
+                        loadDrilldown(data.buahByProduktivitas, data.drillDownBuahByProduktivitas, otherParam);
                     }
                 },
                 error: function(xhr) {
@@ -213,13 +258,14 @@
 
         $(document).ready(function() {
             $('#nav_all').addClass('active');
-            loadAjaxChart('all', "{{ route('buah.pertahun')}}");
+            loadAjaxChart('all', "{{ route('buah.pertahun') }}");
 
             $('.pilih_category').click(function(e) {
                 e.preventDefault();
                 $('.pilih_category').removeClass("active");
                 var category = $(this).data('category');
-                loadAjaxChart(category, "{{ route('buah.pertahun') }}");
+                var url = $(this).data('link-ajax');
+                loadAjaxChart(category, url);
                 $('#nav_' + category).addClass('active');
 
             })
