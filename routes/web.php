@@ -29,3 +29,7 @@ Route::get('/buah/produktivitas', [DetailBuahController::class, 'getDrilldownByP
 Route::get('/drilldown', function () {
     return view('drilldown.index');
 })->name('drilldown');
+
+Route::get('/analysis', function () {
+    return view('analysis.index');
+})->name('analysis');
