@@ -31,7 +31,7 @@
         <div class="section-header ">
             <h1>Detail Produksi Tanaman {{ $dataBuah->buah->nama_buah }} </h1>
         </div>
-        <div class="card card(-danger ">
+        <div class="card card-primary ">
             <div class="card-header">
                 <a href="#" class="btn btn-icon icon-left btn-info btn-lg" onclick="window.history.go(-1); return false;"><i class="fas fa-chevron-circle-left"></i> Data Buah</a>
             </div>
@@ -80,35 +80,6 @@
                 fixedHeader: true,
             });
         });
-        //     const dataColumns = [{
-        //             data: 'id'
-        //         },
-        //         {
-        //             data: 'nama_buah'
-        //         },
-        //         {
-        //             data: 'aksi'
-        //         },
-
-
-        //     ];
-        //     var arrayParams = {
-        //         idTable: '#table-1',
-        //         urlAjax: "{{ route('get.buah') }}",
-        //         columns: dataColumns,
-        //         defColumn: [{
-        //             targets: [2],
-        //             data: 'id',
-        //             render: function(data, type, full, meta) {
-        //                 return `<a class="btn btn-outline-info btn-lg detail"><i class="fas fa-info"></i> Detail</a>`
-        //             },
-        //         }]
-        //     }
-        //     loadAjaxDataTables(arrayParams);
-        //     table.on('xhr', function() {
-        //         jsonTables = table.ajax.json();
-        //         // console.log( jsonTables.data[350]["id"] +' row(s) were loaded' );
-        //     });
-        // })
+ 
     </script>
 @endsection
