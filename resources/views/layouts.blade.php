@@ -102,7 +102,7 @@
                                     class="fas fa-chart-bar"></i> <span>
                                     Drilldown</span></a></li>
                         <li class="menu-header">Data Buah</li>
-                        <li class="{{ Route::is('data.buah') ? 'active' : '' }}"><a class="nav-link"
+                        <li class="{{ Route::is('data.buah') || Route::is('detail.buah') ? 'active' : '' }}"><a class="nav-link"
                                 href="
                                     {{ route('data.buah') }}
                                     "><i
