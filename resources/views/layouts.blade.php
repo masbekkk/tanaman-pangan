@@ -140,8 +140,8 @@
                 </script>
             </div>
             <div class="footer-right">
-                Made With ♥ by <a href="https://www.instagram.com/berkahbekhan.inc/"><text>Mohammad Subkhan
-                        @berkahbekhan.inc</text></a>
+                {{-- Made With ♥ by <a href="https://www.instagram.com/berkahbekhan.inc/"><text>Mohammad Subkhan
+                        @berkahbekhan.inc</text></a> --}}
             </div>
 
         </footer>
