@@ -65,7 +65,7 @@
                         </div>
 
                     </div>
-                    
+
                 </div>
             </div>
             <div class="col">
@@ -75,6 +75,7 @@
                     </div> --}}
                     <div class="card-body">
                         <p>Masukkan Data Untuk Melihat Hasil</p>
+                        {{-- <form> --}}
                         <div class="form-group">
                             <label>Variabel yang Ingin Diubah</label>
                             <select name="variable" class="form-control" id="select-variable" required>
@@ -86,11 +87,46 @@
                         </div>
                         <div class="form-group">
                             <label>Nilai</label>
-                            <input type="number" name="value" class="form-control" required>
+                            <div class="input-group mb-3">
+                                <input type="number" name="value" class="form-control" id="input-value" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-light" id="basic-addon2"></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg">Lihat Hasil Analysis</button>
+                            <button type="submit" class="btn btn-primary btn-lg" id="btn_submit">Lihat Hasil
+                                Analysis</button>
                         </div>
+                        {{-- </form> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h4 id="text1">Hasil Analysis</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Luas Lahan:</strong> <text id="result_luas_lahan1"></text></p>
+                        <p><strong>Produktivitas:</strong> <text id="result_produktivitas1"></text></p>
+                        <p><strong>Produksi:</strong> <text id="result_produksi1"></text></p>
+                        <p><strong>Kesimpulan:</strong> <text id="kesimpulan1" class="text-dark"></text></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h4 id="text2">Hasil Analysis</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Luas Lahan:</strong> <text id="result_luas_lahan2"></text></p>
+                        <p><strong>Produktivitas:</strong> <text id="result_produktivitas2"></text></p>
+                        <p><strong>Produksi:</strong> <text id="result_produksi2"></text></p>
+                        <p><strong>Kesimpulan:</strong> <text id="kesimpulan2" class="text-primary"></text></p>
                     </div>
                 </div>
             </div>
@@ -100,7 +136,16 @@
 
 @section('script')
     <script>
-        var luas_lahan, produktivitas, produksi;
+        var luas_lahan = "",
+            produktivitas = "",
+            produksi = "",
+            selectedVariable = "",
+            value = "";
+
+        var year = "",
+            fruit = "",
+            nama_buah = "";
+
         function loadSelectedData(fruit, year) {
             $.ajax({
                 url: `/analys-buah/${fruit}/${year}`,
@@ -124,11 +169,11 @@
                     luas_lahan = data.luas_lahan
                     produktivitas = data.produktivitas
                     produksi = data.produksi
-                    $('#result_luas_lahan').text(luas_lahan)
-                    $('#result_produktivitas').text(produktivitas)
-                    $('#result_produksi').text(produksi)
+                    $('#result_luas_lahan').text(luas_lahan + ' Hektar')
+                    $('#result_produktivitas').text(produktivitas + ' Kwintal/Hektar')
+                    $('#result_produksi').text(produksi + ' Ton')
                     console.log($('#select-fruit option:selected').text())
-                    var nama_buah = $('#select-fruit option:selected').text();
+                    nama_buah = $('#select-fruit option:selected').text();
                     $('#text-result').text(
                         `Data ${nama_buah} pada Tahun ${year}`
                     )
@@ -146,10 +191,49 @@
             });
         }
 
+        function calculateLuasLahan(param) {
+            var result_produksi, result_produktivitas;
+            //jika produktivitas tetap
+            result_produksi = param * produktivitas / 10
+            $('#result_luas_lahan1').text(param + ' Hektar')
+            $('#result_luas_lahan1').addClass('text-primary changed-text')
+            $('#result_produktivitas1').text(produktivitas + ' Kwintal/Hektar')
+            $('#result_produksi1').text(result_produksi + ' Ton')
+            $('#result_produksi1').addClass('text-info result-text')
+            $('#text1').text('Hasil Analysis Jika Produktivitas Tetap')
+            $('#kesimpulan1').html(`
+    Jika anda ingin Luas Lahan ${nama_buah} pada Tahun ${year} seluas <text class="text-warning">${param} Hektar</text>,
+    dengan produktivitas tetap yaitu sebesar ${produktivitas} Kwintal/Hektar,
+    Maka anda akan mendapatkan produksi sebesar <strong><text class="text-info">${result_produksi} Ton</text></strong>
+`);
+
+
+            //jika produksi tetap
+            result_produktivitas = produksi * 10 / param
+            $('#result_luas_lahan2').text(param)
+            $('#result_luas_lahan2').addClass('text-primary changed-text')
+            $('#result_produktivitas2').text(result_produktivitas)
+            $('#result_produktivitas2').addClass('text-info result-text')
+            $('#result_produksi2').text(result_produksi)
+            $('#text2').text('Hasil Analysis Jika Produksi Tetap')
+            $('#kesimpulan2').html(`
+    Jika anda ingin Luas Lahan ${nama_buah} pada Tahun ${year} seluas <text class="text-warning">${param} Hektar</text>,
+    dengan produksi tetap yaitu sebesar ${produksi} Ton,
+    Maka anda akan mendapatkan produktivitas sebesar <strong><text class="text-info">${result_produktivitas} Kwintal/Hektar</text></strong>
+`);
+        }
+
+        function showResult(param) {
+            if (luas_lahan != "" && produksi != "" && produktivitas != "" && selectedVariable != "") {
+                if (selectedVariable == 'luas_lahan')
+                    calculateLuasLahan(param)
+            } else {
+                alert("Kamu Belum Memilih Data/ Variable Untuk Dianalysis")
+            }
+        }
+
         $(document).ready(function() {
-            var year = "",
-                fruit = "";
-            
+
             $('#select-year').change(function() {
                 year = $(this).val();
 
@@ -164,6 +248,33 @@
                 if (fruit != "" && year != "") {
                     loadSelectedData(fruit, year)
                 }
+            })
+
+            $('#select-variable').change(function() {
+                selectedVariable = $(this).val();
+                if (selectedVariable == 'luas_lahan') {
+                    $('#basic-addon2').text('Hektar')
+                } else if (selectedVariable == 'produktivitas')
+                    $('#basic-addon2').text('Kwintal/Hektar')
+                else if (selectedVariable == 'produksi')
+                    $('#basic-addon2').text('Ton')
+
+            })
+
+            // $('#input-value').change(function() {
+            //     value = $(this).val();
+            //     showResult(value)
+            // })
+
+            $('#btn_submit').click(function() {
+                if (value != "")
+                    showResult(value)
+                else alert("Kamu Belum Memasukkan Nilai yang Ingin Diubah")
+            })
+
+            $('#input-value').keyup(function() {
+                value = $(this).val();
+                showResult(value)
             })
         })
     </script>
