@@ -126,7 +126,7 @@
                         <p><strong>Luas Lahan:</strong> <text id="result_luas_lahan2"></text></p>
                         <p><strong>Produktivitas:</strong> <text id="result_produktivitas2"></text></p>
                         <p><strong>Produksi:</strong> <text id="result_produksi2"></text></p>
-                        <p><strong>Kesimpulan:</strong> <text id="kesimpulan2" class="text-primary"></text></p>
+                        <p><strong>Kesimpulan:</strong> <text id="kesimpulan2" class="text-dark"></text></p>
                     </div>
                 </div>
             </div>
@@ -202,31 +202,96 @@
             $('#result_produksi1').addClass('text-info result-text')
             $('#text1').text('Hasil Analysis Jika Produktivitas Tetap')
             $('#kesimpulan1').html(`
-    Jika anda ingin Luas Lahan ${nama_buah} pada Tahun ${year} seluas <text class="text-warning">${param} Hektar</text>,
-    dengan produktivitas tetap yaitu sebesar ${produktivitas} Kwintal/Hektar,
-    Maka anda akan mendapatkan produksi sebesar <strong><text class="text-info">${result_produksi} Ton</text></strong>
-`);
-
+                Jika anda ingin Luas Lahan ${nama_buah} pada Tahun ${year} seluas <text class="text-warning">${param} Hektar</text>,
+                dengan produktivitas tetap yaitu sebesar ${produktivitas} Kwintal/Hektar,
+                Maka anda akan mendapatkan Produksi sebesar <strong><text class="text-info">${result_produksi} Ton</text></strong>
+            `);
 
             //jika produksi tetap
             result_produktivitas = produksi * 10 / param
-            $('#result_luas_lahan2').text(param)
+            $('#result_luas_lahan2').text(param + ' Hektar')
             $('#result_luas_lahan2').addClass('text-primary changed-text')
-            $('#result_produktivitas2').text(result_produktivitas)
+            $('#result_produktivitas2').text(result_produktivitas + ' Kwintal/Hektar')
             $('#result_produktivitas2').addClass('text-info result-text')
-            $('#result_produksi2').text(result_produksi)
+            $('#result_produksi2').text(produksi + ' Ton')
             $('#text2').text('Hasil Analysis Jika Produksi Tetap')
             $('#kesimpulan2').html(`
-    Jika anda ingin Luas Lahan ${nama_buah} pada Tahun ${year} seluas <text class="text-warning">${param} Hektar</text>,
-    dengan produksi tetap yaitu sebesar ${produksi} Ton,
-    Maka anda akan mendapatkan produktivitas sebesar <strong><text class="text-info">${result_produktivitas} Kwintal/Hektar</text></strong>
-`);
+                Jika anda ingin Luas Lahan ${nama_buah} pada Tahun ${year} seluas <text class="text-warning">${param} Hektar</text>,
+                dengan produksi tetap yaitu sebesar ${produksi} Ton,
+                Maka anda akan mendapatkan Produktivitas sebesar <strong><text class="text-info">${result_produktivitas} Kwintal/Hektar</text></strong>
+            `);
+        }
+
+        function calculateProduktivitas(param) {
+            var result_produksi, result_luas_lahan;
+            //jika luas_lahan tetap
+            result_produksi = param * luas_lahan / 10
+            $('#result_produktivitas1').text(param + ' Kwintal/Hektar')
+            $('#result_produktivitas1').addClass('text-primary changed-text')
+            $('#result_luas_lahan1').text(luas_lahan + ' Hektar')
+            $('#result_produksi1').text(result_produksi + ' Ton')
+            $('#result_produksi1').addClass('text-info result-text')
+            $('#text1').text('Hasil Analysis Jika Luas Lahan Tetap')
+            $('#kesimpulan1').html(`
+                Jika anda ingin Produktivitas ${nama_buah} pada Tahun ${year} sebesar <text class="text-warning">${param} Kwintal/Hektar</text>,
+                dengan Luas Lahan tetap yaitu sebesar ${luas_lahan} Hektar,
+                Maka anda akan mendapatkan Produksi sebesar <strong><text class="text-info">${result_produksi} Ton</text></strong>
+            `);
+
+            //jika produksi tetap
+            result_luas_lahan = produksi * 10 / param
+            $('#result_produktivitas2').text(param + ' Kwintal/Hektar')
+            $('#result_produktivitas2').addClass('text-primary changed-text')
+            $('#result_luas_lahan2').text(result_luas_lahan + ' Hektar')
+            $('#result_luas_lahan2').addClass('text-info result-text')
+            $('#result_produksi2').text(produksi + ' Ton')
+            $('#text2').text('Hasil Analysis Jika Produksi Tetap')
+            $('#kesimpulan2').html(`
+                Jika anda ingin Produktivitas ${nama_buah} pada Tahun ${year} sebesar <text class="text-warning">${param} Kwintal/Hektar</text>,
+                dengan produksi tetap yaitu sebesar ${produksi} Ton,
+                Maka anda akan membutuhkan Luas Lahan sebesar <strong><text class="text-info">${result_luas_lahan} Hektar</text></strong>
+            `);
+        }
+
+        function calculateProduksi(param) {
+            var result_produktivitas, result_luas_lahan;
+            //jika luas_lahan tetap
+            result_produktivitas = param * luas_lahan / 10
+            $('#result_produksi1').text(param + ' Ton')
+            $('#result_produksi1').addClass('text-primary changed-text')
+            $('#result_luas_lahan1').text(luas_lahan + ' Hektar')
+            $('#result_produktivitas1').text(result_produktivitas + ' Ton')
+            $('#result_produktivitas1').addClass('text-info result-text')
+            $('#text1').text('Hasil Analysis Jika Luas Lahan Tetap')
+            $('#kesimpulan1').html(`
+                Jika anda ingin Produksi ${nama_buah} pada Tahun ${year} sebesar <text class="text-warning">${param} Ton</text>,
+                dengan Luas Lahan tetap yaitu sebesar ${luas_lahan} Hektar,
+                Maka anda akan mendapatkan Produktivitas sebesar <strong><text class="text-info">${result_produktivitas} Kwintal/Hektar</text></strong>
+            `);
+
+            //jika produktivitas tetap
+            result_luas_lahan = param * produktivitas / 10
+            $('#result_produksi2').text(param + ' Ton')
+            $('#result_produksi2').addClass('text-primary changed-text')
+            $('#result_produktivitas2').text(produktivitas + ' Kwintal/Hektar')
+            $('#result_luas_lahan2').text(result_luas_lahan + ' Ton')
+            $('#result_luas_lahan2').addClass('text-info result-text')
+            $('#text2').text('Hasil Analysis Jika Produktivitas Tetap')
+            $('#kesimpulan2').html(`
+                Jika anda ingin Produksi ${nama_buah} pada Tahun ${year} sebesar <text class="text-warning">${param} Ton</text>,
+                dengan Produktivitas tetap yaitu sebesar ${produktivitas} Kwintal/Hektar,
+                Maka anda akan membutuhkan Luas Lahan sebesar <strong><text class="text-info">${result_luas_lahan} Kwintal/Hektar</text></strong>
+            `);
         }
 
         function showResult(param) {
             if (luas_lahan != "" && produksi != "" && produktivitas != "" && selectedVariable != "") {
                 if (selectedVariable == 'luas_lahan')
                     calculateLuasLahan(param)
+                else if (selectedVariable == 'produktivitas')
+                    calculateProduktivitas(param)
+                else if (selectedVariable == 'produksi')
+                    calculateProduksi(param)
             } else {
                 alert("Kamu Belum Memilih Data/ Variable Untuk Dianalysis")
             }
