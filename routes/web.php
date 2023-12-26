@@ -18,8 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('tanaman_pangan.index');
-})->name('/');
+    // return view('tanaman_pangan.index');
+    return view('drilldown.index');
+})->name('drilldown');
 
 Route::get('/get-buah', [BuahController::class, 'getBuah'])->name('get.buah');
 Route::get('/detail-buah/{id}', [DetailBuahController::class, 'detailBuah'])->name('detail.buah');
@@ -28,9 +29,10 @@ Route::get('/buah/luas-lahan', [DetailBuahController::class, 'getDrilldownByLuas
 Route::get('/buah/produksi', [DetailBuahController::class, 'getDrilldownByProduksi'])->name('buah.produksi');
 Route::get('/buah/produktivitas', [DetailBuahController::class, 'getDrilldownByProduktivitas'])->name('buah.produktivitas');
 
-Route::get('/drilldown', function () {
-    return view('drilldown.index');
-})->name('drilldown');
+Route::get('/data-buah', function () {
+    // return view('drilldown.index');
+    return view('tanaman_pangan.index');
+})->name('data.buah');
 
 Route::get('/analysis', function () {
     $tahun = DetailBuah::distinct()->get(['tahun']);
