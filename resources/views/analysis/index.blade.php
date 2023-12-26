@@ -260,7 +260,7 @@
             $('#result_produksi1').text(param + ' Ton')
             $('#result_produksi1').addClass('text-primary changed-text')
             $('#result_luas_lahan1').text(luas_lahan + ' Hektar')
-            $('#result_produktivitas1').text(result_produktivitas + ' Ton')
+            $('#result_produktivitas1').text(result_produktivitas + ' Kwintal/Hektar')
             $('#result_produktivitas1').addClass('text-info result-text')
             $('#text1').text('Hasil Analysis Jika Luas Lahan Tetap')
             $('#kesimpulan1').html(`
@@ -285,6 +285,12 @@
         }
 
         function showResult(param) {
+            $('#result_luas_lahan1').removeClass()
+            $('#result_produktivitas1').removeClass()
+            $('#result_produksi1').removeClass()
+            $('#result_luas_lahan2').removeClass()
+            $('#result_produktivitas2').removeClass()
+            $('#result_produksi2').removeClass()
             if (luas_lahan != "" && produksi != "" && produktivitas != "" && selectedVariable != "") {
                 if (selectedVariable == 'luas_lahan')
                     calculateLuasLahan(param)

@@ -76,31 +76,10 @@
 
                 </div>
                 <ul class="navbar-nav navbar-right">
-
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown"
-                            class="nav-link dropdown-toggle nav-link-lg nav-link-user text-dark">
-                            <div class="d-sm-none d-lg-inline-block">
-                                {{-- <div class="font-username"> --}}
-                                {{-- Hai, Admin --}}
-                                Hai, Pengunjung!
-                                {{-- </div> --}}
-                            </div>
-                            {{-- <i class="fas fa-chevron-down fa-fw fa-sm "></i> --}}
-                        </a>
-
-                        {{-- <div class="dropdown-menu dropdown-menu-right">
-                            <a href="#" class="dropdown-item has-icon text-danger" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt">
-                                </i> Logout
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </a>
-                        </div> --}}
+                    <li>
+                        <div class="d-sm-none d-lg-inline-block text-dark">
+                            <strong>Hai, Pengunjung!</strong>
+                        </div>
                     </li>
 
                 </ul>
