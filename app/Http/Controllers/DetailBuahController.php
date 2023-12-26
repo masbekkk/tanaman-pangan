@@ -200,4 +200,9 @@ class DetailBuahController extends Controller
             'drillDownBuahByProduktivitas' => $drillDownBuahByProduktivitas,
         ]);
     }
+
+    function getAnalys($idBuah, $year)
+    {
+        return response()->json(DetailBuah::where('buah_id', $idBuah)->where('tahun', $year)->first());
+    }
 }

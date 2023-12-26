@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BuahController;
 use App\Http\Controllers\DetailBuahController;
+use App\Models\Buah;
+use App\Models\DetailBuah;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,5 +33,9 @@ Route::get('/drilldown', function () {
 })->name('drilldown');
 
 Route::get('/analysis', function () {
-    return view('analysis.index');
+    $tahun = DetailBuah::distinct()->get(['tahun']);
+    $buah = Buah::get(['id', 'nama_buah']);
+    return view('analysis.index', ['tahun' => $tahun, 'buah' => $buah]);
 })->name('analysis');
+
+Route::get('/analys-buah/{idBuah}/{year}', [DetailBuahController::class, 'getAnalys'])->name('analys.buah');

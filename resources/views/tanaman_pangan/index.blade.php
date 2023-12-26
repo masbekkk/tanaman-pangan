@@ -93,29 +93,6 @@
                 jsonTables = table.ajax.json();
                 // console.log( jsonTables.data[350]["id"] +' row(s) were loaded' );
             });
-
-            // $('.detail').click( function(e) {
-            //     alert("ok")
-            // $('#header-table').html(
-            //     `
-        //     <th>#</th>
-        //     <th>Tahun OWEEEEE</th>
-        //     <th>Aksi</th>`
-            // );
-            // })
-
-            // $(document).on('click', `.detail`, function(e) {
-            //     // alert("ok")
-            //     $('#header-table').html(
-            //         `
-            //         <tr>
-            //         <th>#</th>
-            //         <th>Tahun OWEEEEE</th>
-            //         <th>Aksi</th>
-            //         </tr>
-            //         `
-            //     );
-            // });
         })
     </script>
 @endsection

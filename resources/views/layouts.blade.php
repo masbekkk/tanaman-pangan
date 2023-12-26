@@ -131,9 +131,9 @@
                                     Data Buah</span></a></li>
 
                         <li class="menu-header">Analysis What If</li>
-                        <li class="{{ Route::is('drilldown') ? 'active' : '' }}"><a class="nav-link"
+                        <li class="{{ Route::is('analysis') ? 'active' : '' }}"><a class="nav-link"
                                 href="
-                                                {{ route('drilldown') }}
+                                                {{ route('analysis') }}
                                                 "><i
                                     class="fas fa-table"></i> <span>
                                     Analysis What If</span></a></li>
