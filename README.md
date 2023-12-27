@@ -2,7 +2,7 @@
  - [x] Clone this repository 
  - [x] composer install
  - [x] cp .env.example .env
- - [x] Create DB on mysql server. Name db is "tanaman_pangan"
+ - [x] Create DB on mysql server. Name db is "tanaman_jogja"
  - [x] php artisan key:generate
  - [x] php artisan migrate:refresh --seed
  - [x] php artisan serve
